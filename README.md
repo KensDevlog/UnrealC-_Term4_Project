@@ -10,7 +10,7 @@ Term 4 Project for Ken, Tobias, Julian D, Dylan, and Diana.
 
 ## Roles
 
-### Gameplay (Characters)
+### Gameplay (Characters/Weapons)
 - Ken
 
 ### Gameplay (Systems)
