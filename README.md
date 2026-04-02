@@ -3,9 +3,10 @@ Term 4 Project for Ken, Tobias, Julian D, Dylan, and Diana.
 
 ## Game
 - FPS, Multiplayer, Deathmatch/Gungame
-- Players use wands to shoot other players
+- Players use their wands to shoot other players
 - There's a list of combat spells the player cycles through in a fixed order after every kill
-- The first player to get a kill with the last wand wins
+- Everyone starts with the same first spell and makes their way through the list of spells
+- The first player to get a kill with the last spell wins
 
 ## Roles
 
