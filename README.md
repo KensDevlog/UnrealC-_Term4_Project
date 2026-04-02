@@ -8,19 +8,21 @@ Term 4 Project for Ken, Tobias, Julian D, Dylan, and Diana.
 - Everyone starts with the same first spell and makes their way through the list of spells
 - The first player to get a kill with the last spell wins
 
-## Roles
+## Ken
+- Character
+- Weapon
+- Spells
 
-### Gameplay (Characters/Weapons)
-- Ken
+## Julian
+- Round System
+- Respawn System
 
-### Gameplay (Systems)
-- Julian
+## Dylan
+- Health UI
+- Leaderboard
 
-### VFX
-- Tobias
+## Tobias
+- Spell VFX
 
-### Shaders
-- Diana
-
-### UI
-- Dylan
+## Diana
+- Shaders
