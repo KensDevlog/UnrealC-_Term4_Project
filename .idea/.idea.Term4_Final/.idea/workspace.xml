@@ -13,13 +13,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec0dff1-3a33-42fa-9ad9-f147e08de186" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameMovementComponent.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameCharacter.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameMovementComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Term4_Final/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Term4_Final/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/FirstPerson/Lvl_FirstPerson.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/FirstPerson/Lvl_FirstPerson.umap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/Spell.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/WandComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/Spell.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/WandComponent.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,10 +30,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Plugins/FX/Niagara/Source/Niagara/Public/NiagaraSystemSimulation.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Plugins/FX/Niagara/Source/NiagaraEditor/Private/UpgradeNiagaraScriptResults.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Components/ActorComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Public/Physics/NetworkPhysicsComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Private/Spell.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameMovementComponent.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Private/WandComponent.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Public/Spell.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameCharacter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameMovementComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Public/WandComponent.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -58,7 +63,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Combat",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -166,7 +171,10 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
   </component>
@@ -179,6 +187,7 @@
       <updated>1775173426295</updated>
       <workItem from="1775173429034" duration="1000" />
       <workItem from="1776544775507" duration="5281000" />
+      <workItem from="1776550502088" duration="3428000" />
     </task>
     <servers />
   </component>

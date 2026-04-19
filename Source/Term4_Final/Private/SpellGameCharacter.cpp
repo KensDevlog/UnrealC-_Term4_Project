@@ -5,20 +5,22 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "WandComponent.h"
 #include "Public/SpellGameMovementComponent.h"
 
 ASpellGameCharacter::ASpellGameCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<USpellGameMovementComponent>(CharacterMovementComponentName))
 {
 	SpellGameMovementComponent = Cast<USpellGameMovementComponent>(GetCharacterMovement());
+	CurrentHealth = MaxHealth;
+	
+	WandComponent = CreateDefaultSubobject<UWandComponent>("WandComponent");
 }
 
 // Called when the game starts or when spawned
 void ASpellGameCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	
 }
 
 void ASpellGameCharacter::PossessedBy(AController* NewController)
@@ -76,6 +78,11 @@ void ASpellGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 			EnhancedInputComponent->BindAction(SprintInputAction, ETriggerEvent::Started, this, &ASpellGameCharacter::OnSprintInputReceived);
 			EnhancedInputComponent->BindAction(SprintInputAction, ETriggerEvent::Completed, this, &ASpellGameCharacter::OnSprintInputReceived);
 		}
+		if (ShootInputAction)
+		{
+			EnhancedInputComponent->BindAction(ShootInputAction, ETriggerEvent::Started, this, &ASpellGameCharacter::OnShootInputReceived);
+			EnhancedInputComponent->BindAction(ShootInputAction, ETriggerEvent::Completed, this, &ASpellGameCharacter::OnShootInputReceived);
+		}
 	}
 }
 
@@ -111,5 +118,25 @@ void ASpellGameCharacter::OnJumpInputReceived(const FInputActionValue& Value)
 void ASpellGameCharacter::OnSprintInputReceived(const FInputActionValue& Value)
 {
 	(Value.Get<bool>()) ? SpellGameMovementComponent->SprintPressed() : SpellGameMovementComponent->SprintReleased();
+}
+
+void ASpellGameCharacter::OnShootInputReceived(const FInputActionValue& Value)
+{
+	WandComponent->HandleShootInput(Value.Get<bool>());
+}
+
+float ASpellGameCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+                                      class AController* EventInstigator, AActor* DamageCauser)
+{
+	const float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	CurrentHealth = FMath::Clamp(CurrentHealth - ActualDamage, 0.f, MaxHealth);
+
+	if (CurrentHealth <= 0.f)
+	{
+		Destroy();
+	}
+
+	return ActualDamage;
 }
 

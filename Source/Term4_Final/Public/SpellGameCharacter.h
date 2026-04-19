@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "SpellGameCharacter.generated.h"
 
+class UWandComponent;
 struct FInputActionValue;
 class UInputAction;
 class UInputMappingContext;
@@ -27,9 +28,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY()
-	TObjectPtr<USpellGameMovementComponent> MovementComponent;
-	
 	UFUNCTION(Client, Reliable)
 	void OnPossessed_Client(AController* NewController);
 	
@@ -49,8 +47,20 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> SprintInputAction;
 	
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> ShootInputAction;
 	
+	// Stats
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Stats")
+	float MaxHealth = 100.f;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Stats")
+	float CurrentHealth = 0.f;
 	
+	// Wand Component
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Wand")
+	TObjectPtr<UWandComponent> WandComponent;
+	
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 protected:
 	virtual void BeginPlay() override;
 	
@@ -62,4 +72,7 @@ protected:
 	void OnLookInputReceived(const FInputActionValue& Value);
 	void OnJumpInputReceived(const FInputActionValue& Value);
 	void OnSprintInputReceived(const FInputActionValue& Value);
+	void OnShootInputReceived(const FInputActionValue& Value);
+	
+	
 };
