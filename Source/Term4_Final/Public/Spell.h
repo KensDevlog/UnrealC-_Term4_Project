@@ -38,6 +38,9 @@ public:
 	TObjectPtr<UNiagaraSystem> CastEffect;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TObjectPtr<UNiagaraSystem> HitscanHitEffect;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	float PrimaryShotInterval = 1;
 	
 	// For burst shots, leave at 0 if regular auto
@@ -50,6 +53,12 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void CastSpell(AActor* Instigator, AActor* Causer, const FVector& Origin, const FRotator& Direction) const;
+	
+	UFUNCTION()
+	void CastSpell_Projectile(AActor* Instigator, AActor* Causer, const FVector& Origin, const FRotator& Direction, UWorld* World) const;
+	
+	UFUNCTION()
+	void CastSpell_Hitscan(AActor* Instigator, AActor* Causer, const FVector& Origin, const FRotator& Direction, UWorld* World) const;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	TSubclassOf<ASpellProjectile> ProjectileClass;
