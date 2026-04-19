@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Ken Arigo @ VFS 2026
 
 
 #include "Public/SpellGameMovementComponent.h"

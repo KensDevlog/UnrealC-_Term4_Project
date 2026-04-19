@@ -1,9 +1,10 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Ken Arigo @ VFS 2026
 
 
 #include "WandComponent.h"
 
 #include "Spell.h"
+#include "SpellGameCharacter.h"
 #include "Camera/CameraComponent.h"
 
 
@@ -27,8 +28,6 @@ void UWandComponent::BeginPlay()
 	{
 		EquippedSpell = NewObject<USpell>(this, EquippedSpellClass);
 	}
-	
-	CameraComponent = GetOwner()->FindComponentByClass<UCameraComponent>();
 }
 
 
@@ -36,7 +35,6 @@ void UWandComponent::BeginPlay()
 void UWandComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 	if (!IsTryingToCast || !EquippedSpell) return;
 	if (GetWorld()->GetTimeSeconds() < NextPrimaryIntervalShotTime) return;
 	
@@ -54,21 +52,31 @@ void UWandComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 		NextSecondaryIntervalShotTime = GetWorld()->GetTimeSeconds() + EquippedSpell->SecondaryShotInterval;
 	}
 	
-	ShootSpell();
+	if (ASpellGameCharacter* Owner = Cast<ASpellGameCharacter>(GetOwner()))
+	{
+		FVector SpellSpawnPoint = Owner->CameraComponent->GetComponentLocation() + Owner->CameraComponent->GetForwardVector() * 100.f;
+		FRotator ShootDir = Owner->CameraComponent->GetComponentRotation();
+		ShootSpell(SpellSpawnPoint, ShootDir);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Owner invalid!"));
+	}	
+	
 }
 
-void UWandComponent::ShootSpell()
+void UWandComponent::ShootSpell_Implementation(FVector SpellSpawnPoint, FRotator ShootDir)
 {
-	FVector SpellSpawnPoint = GetOwner()->GetActorLocation() + GetOwner()->GetActorForwardVector() * 100.f;
-	
-	FRotator ShootDir;
-	CameraComponent ?  ShootDir = CameraComponent->GetComponentRotation() : ShootDir = GetOwner()->GetActorRotation();
-	
 	EquippedSpell->CastSpell(GetOwner(), GetOwner(), SpellSpawnPoint, ShootDir);
 }
 
 void UWandComponent::HandleShootInput(bool InputDown)
 {
 	InputDown ? IsTryingToCast = true : IsTryingToCast = false;
+}
+
+void UWandComponent::ChangeEquippedSpell_Implementation(USpell* NewSpell)
+{
+	EquippedSpell = NewSpell;
 }
 
