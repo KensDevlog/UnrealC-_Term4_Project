@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "SpellProjectile.generated.h"
 
+class UCameraComponent;
 class UNiagaraSystem;
 class USphereComponent;
 class UProjectileMovementComponent;

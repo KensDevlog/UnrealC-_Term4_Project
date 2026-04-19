@@ -51,7 +51,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	int ShotsPerBurst = 1;
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void CastSpell(AActor* Instigator, AActor* Causer, const FVector& Origin, const FRotator& Direction) const;
 	
 	UFUNCTION()

@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "SpellGameCharacter.generated.h"
 
+class UCameraComponent;
 class UWandComponent;
 struct FInputActionValue;
 class UInputAction;
@@ -28,7 +29,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(Client, Reliable)
+	UFUNCTION(Client, Reliable, BlueprintCallable)
 	void OnPossessed_Client(AController* NewController);
 	
 	// Inputs
@@ -59,6 +60,14 @@ public:
 	// Wand Component
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Wand")
 	TObjectPtr<UWandComponent> WandComponent;
+	
+	// First Person Mesh
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Character")
+	TObjectPtr<USkeletalMeshComponent> FirstPersonCharacterMesh;
+	
+	// Camera
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="Camera")
+	TObjectPtr<UCameraComponent> CameraComponent;
 	
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 protected:

@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Ken Arigo @ VFS 2026
 
 
 #include "Spell.h"
@@ -8,7 +8,7 @@
 #include "Engine/DamageEvents.h"
 
 
-void USpell::CastSpell(AActor* Instigator, AActor* Causer, const FVector& Origin, const FRotator& Direction) const
+void USpell::CastSpell_Implementation(AActor* Instigator, AActor* Causer, const FVector& Origin, const FRotator& Direction) const
 {
 	if (!ProjectileClass || !Instigator) return;
 	UWorld* World = Instigator->GetWorld();

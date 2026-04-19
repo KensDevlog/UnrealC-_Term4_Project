@@ -36,11 +36,14 @@ public:
 	
 	// Member functions
 public:
-	UFUNCTION(BlueprintCallable)
-	void ShootSpell();
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void ShootSpell(FVector SpellSpawnPoint, FRotator ShootDir);
 	
 	UFUNCTION(BlueprintCallable)
 	void HandleShootInput(bool InputDown);
+	
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void ChangeEquippedSpell(USpell* NewSpell);
 	
 protected:
 	UPROPERTY(BlueprintReadOnly)
@@ -59,7 +62,4 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, Category="Shot Interval")
 	int BurstShotIteration = 0;
-	
-	UPROPERTY()
-	TObjectPtr<UCameraComponent> CameraComponent;
 };
