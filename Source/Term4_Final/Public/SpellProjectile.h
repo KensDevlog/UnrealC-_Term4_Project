@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "SpellProjectile.generated.h"
 
+class UNiagaraComponent;
 class UCameraComponent;
 class UNiagaraSystem;
 class USphereComponent;
@@ -46,6 +47,9 @@ public:
 	TObjectPtr<USphereComponent> CollisionComponent;
 	
 	// Constant Visual
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spell")
+	TObjectPtr<UNiagaraComponent> SpellEffectComponent;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spell")
 	TObjectPtr<UNiagaraSystem> SpellEffect;
 	

@@ -7,6 +7,7 @@
 #include "Components/SphereComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "Engine/DamageEvents.h"
+#include "NiagaraComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 
@@ -40,6 +41,10 @@ ASpellProjectile::ASpellProjectile()
 	ProjectileMovementComponent->bShouldBounce = false;
 	ProjectileMovementComponent->ProjectileGravityScale = 0.1f;
 	
+	SpellEffectComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("SpellEffect"));
+	SpellEffectComponent->SetupAttachment(RootComponent);
+	SpellEffectComponent->SetAutoActivate(true);
+	
 	SetLifeSpan(10.f);
 }
 
@@ -47,6 +52,12 @@ ASpellProjectile::ASpellProjectile()
 void ASpellProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	if (SpellEffect && SpellEffectComponent)
+	{
+		SpellEffectComponent->SetAsset(SpellEffect);
+		SpellEffectComponent->Activate(true);
+	}
 	
 }
 
@@ -77,6 +88,10 @@ void ASpellProjectile::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPr
 		HitNormal.Rotation()
 	);
 
+	if (SpellEffectComponent)
+	{
+		SpellEffectComponent->Deactivate();
+	}
 	Destroy();
 }
 
