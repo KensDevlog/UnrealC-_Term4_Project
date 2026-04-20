@@ -141,6 +141,11 @@ void ASpellGameCharacter::OnShootInputReceived(const FInputActionValue& Value)
 	WandComponent->HandleShootInput(Value.Get<bool>());
 }
 
+void ASpellGameCharacter::Multicast_OnDeath_Implementation()
+{
+	BP_OnDeath();
+}
+
 float ASpellGameCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
                                       class AController* EventInstigator, AActor* DamageCauser)
 {
@@ -150,7 +155,9 @@ float ASpellGameCharacter::TakeDamage(float DamageAmount, struct FDamageEvent co
 
 	if (CurrentHealth <= 0.f)
 	{
-		Destroy();
+
+		Multicast_OnDeath();
+		OnCharacterDied.Broadcast(this);
 	}
 
 	return ActualDamage;

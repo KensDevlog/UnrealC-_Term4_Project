@@ -13,6 +13,8 @@ class UInputAction;
 class UInputMappingContext;
 class USpellGameMovementComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCharacterDied, ASpellGameCharacter*, DeadCharacter);
+
 UCLASS()
 class TERM4_FINAL_API ASpellGameCharacter : public ACharacter
 {
@@ -32,6 +34,9 @@ public:
 	UFUNCTION(Client, Reliable, BlueprintCallable)
 	void OnPossessed_Client(AController* NewController);
 	
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnCharacterDied OnCharacterDied;
+
 	// Inputs
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Input")
 	const TObjectPtr<UInputMappingContext> DefaultMappingContext;
@@ -68,6 +73,13 @@ public:
 	// Camera
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_OnDeath();
+
+	/** Called to allow Blueprint code to react to this character's death */
+	UFUNCTION(BlueprintImplementableEvent, Category = "Spell", meta = (DisplayName = "On Death"))
+	void BP_OnDeath();
 	
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 protected:
