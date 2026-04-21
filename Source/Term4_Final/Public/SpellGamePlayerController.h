@@ -1,36 +1,40 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "SpellGameHUD.h"
 #include "SpellGamePlayerController.generated.h"
-
 
 class ASpellGameCharacter;
 
-/**
- * 
- */
 UCLASS()
 class TERM4_FINAL_API ASpellGamePlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
-protected:
 
-	/** Character class to respawn when the possessed pawn is destroyed */
-	UPROPERTY(EditAnywhere, Category = "Shooter|Respawn")
+protected:
+	UPROPERTY(EditAnywhere, Category="Respawn")
 	TSubclassOf<ASpellGameCharacter> CharacterClass;
 
-	/** Gameplay Initialization */
-	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, Category="HUD")
+	TSubclassOf<USpellGameHUD> HUDClass;
 
-	/** Pawn initialization */
+	TObjectPtr<USpellGameHUD> HUD;
+
+	int32 KillCount = 0;
+	int32 DeathCount = 0;
+
+public:
+	void NotifyKill();
+
+	// public so SpellGameCharacter can bind to it from OnPossessed_Client
+	UFUNCTION()
+	void OnPawnHealthChanged(float HealthPercent);
+
+protected:
+	virtual void BeginPlay() override;
 	virtual void OnPossess(APawn* InPawn) override;
 
-	/** Called if the possessed pawn is destroyed */
 	UFUNCTION()
 	void OnPawnDestroyed(AActor* DestroyedActor);
-
 };
