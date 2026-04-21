@@ -1,0 +1,68 @@
+name: Build Release
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: '0 0 * * *' # Runs every day at midnight
+  
+concurrency:
+    group: build-release
+    cancel-in-progress: true
+
+permissions:
+    contents: write
+
+jobs:
+    build:
+      name: Build Unreal Project
+      runs-on: self-hosted
+
+      steps:
+      - name: Checkout Main
+        uses: actions/checkout@v4
+
+      - name: Build Project
+        id: build_step
+        run: |
+          & "C:\Program Files\Epic Games\UE_5.6\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun ` #put the path to your RunUAT.bat file here, make it match the version of your project
+          -project="C:\Users\Public\Repos\UnrealC-_Term4_Project\Term4_Final.uproject" `
+          -platform=Win64 `
+          -clientconfig=Shipping `
+          -build -cook -stage -package -archive `
+          -archivedirectory="C:\Builds\Pipelines" # put the path to where you want the build to save here
+
+      - name: Log Build Result
+        if: always()
+        run: |
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+          $commit = $env:GITHUB_SHA.Substring(0, 7)
+          $actor = $env:GITHUB_ACTOR
+          $runNumber = $env:GITHUB_RUN_NUMBER
+          $outcome = "${{ steps.build_step.outcome }}"
+
+          $logEntry = @"
+          [$timestamp] BUILD #$runNumber
+          Triggered by : $actor
+          Commit : $commit
+          Outcome : $outcome
+          --------------------------------
+          "@
+
+          Add-Content -Path "C:\Builds\Pipelines\build_log.txt" -Value $logEntry # put the path to where you want the log file to save here
+
+      - name: Zip Build
+        run: |
+          $date = Get-Date -Format "yyyy-MM-dd"
+          $commit = $env:GITHUB_SHA.Substring(0, 7)
+          Compress-Archive -Path "C:\Builds\Pipelines\Windows\*" `
+            -DestinationPath "C:\Builds\Pipelines\KensAmazingPipelinesThing-$date-$commit.zip" # put the path to where you want the zip file to save here
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Pipelines Build ${{ github.run_number }}
+          files: |
+              C:\Builds\Pipelines\KensAmazingPipelinesThing-*.zip
+              C:\Builds\Pipelines\build_log.txt
+       
