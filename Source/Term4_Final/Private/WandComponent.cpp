@@ -75,8 +75,30 @@ void UWandComponent::HandleShootInput(bool InputDown)
 	InputDown ? IsTryingToCast = true : IsTryingToCast = false;
 }
 
+USpell* UWandComponent::GetCurrentSpell()
+{
+	return EquippedSpell;
+}
+
 void UWandComponent::ChangeEquippedSpell_Implementation(USpell* NewSpell)
 {
 	EquippedSpell = NewSpell;
+}
+
+void UWandComponent::ChangeEquippedSpellByClass_Implementation(TSubclassOf<USpell> NewSpellClass)
+{
+	if (!NewSpellClass) return;
+
+	// Spawn de la nueva instancia
+	USpell* NewSpell = NewObject<USpell>(GetOwner(), NewSpellClass);
+
+	// Guardar la clase y llamar al sistema existente
+	EquippedSpellClass = NewSpellClass;
+	ChangeEquippedSpell(NewSpell);
+}
+
+TSubclassOf<USpell> UWandComponent::GetCurrentSpellClass()
+{
+	return EquippedSpellClass;
 }
 

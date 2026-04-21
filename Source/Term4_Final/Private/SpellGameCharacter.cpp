@@ -133,13 +133,33 @@ void ASpellGameCharacter::OnShootInputReceived(const FInputActionValue& Value)
     WandComponent->HandleShootInput(Value.Get<bool>());
 }
 
-void ASpellGameCharacter::Multicast_OnDeath_Implementation()
+void ASpellGameCharacter::Multicast_OnDeath_Implementation(ASpellGameCharacter* Killer)
 {
-    BP_OnDeath();
+	BP_OnDeath(Killer);
 }
 
 void ASpellGameCharacter::Client_UpdateHealth_Implementation(float HealthPercent)
 {
+	const float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	CurrentHealth = FMath::Clamp(CurrentHealth - ActualDamage, 0.f, MaxHealth);
+
+	if (CurrentHealth <= 0.f)
+	{
+
+		if(ASpellGameCharacter* InstigatorCharacter = Cast<ASpellGameCharacter>(EventInstigator->GetPawn()))
+		{
+			Multicast_OnDeath(InstigatorCharacter);
+		}
+		else
+		{
+			Multicast_OnDeath(nullptr);
+		}
+
+		OnCharacterDied.Broadcast(this);
+	}
+
+	return ActualDamage;
     OnHealthChanged.Broadcast(HealthPercent);
 }
 

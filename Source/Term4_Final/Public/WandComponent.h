@@ -44,6 +44,15 @@ public:
 	
 	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void ChangeEquippedSpell(USpell* NewSpell);
+
+	UFUNCTION(BlueprintCallable)
+	USpell* GetCurrentSpell();
+
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void ChangeEquippedSpellByClass(TSubclassOf<USpell> NewSpellClass);
+
+	UFUNCTION(BlueprintCallable)
+	TSubclassOf<USpell> GetCurrentSpellClass();
 	
 protected:
 	UPROPERTY(BlueprintReadOnly)

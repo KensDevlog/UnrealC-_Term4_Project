@@ -34,6 +34,14 @@ public:
     UPROPERTY(BlueprintAssignable, Category="Events")
     FOnCharacterDied OnCharacterDied;
 
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_OnDeath(ASpellGameCharacter* Killer);
+
+	/** Called to allow Blueprint code to react to this character's death */
+	UFUNCTION(BlueprintImplementableEvent, Category = "Spell", meta = (DisplayName = "On Death"))
+	void BP_OnDeath(ASpellGameCharacter* Killer);
+	
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
     UPROPERTY(BlueprintAssignable, Category="Events")
     FOnHealthChanged OnHealthChanged;
 
