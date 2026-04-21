@@ -25,6 +25,7 @@ void UWandComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+
 	if (EquippedSpellClass)
 	{
 		EquippedSpell = NewObject<USpell>(this, EquippedSpellClass);
@@ -88,12 +89,11 @@ void UWandComponent::ChangeEquippedSpell_Implementation(USpell* NewSpell)
 
 void UWandComponent::ChangeEquippedSpellByClass_Implementation(TSubclassOf<USpell> NewSpellClass)
 {
+
 	if (!NewSpellClass) return;
 
-	USpell* NewSpell = NewObject<USpell>(GetOwner(), NewSpellClass);
-
 	EquippedSpellClass = NewSpellClass;
-	ChangeEquippedSpell(NewSpell);
+	EquippedSpell = NewObject<USpell>(GetOwner(), NewSpellClass);
 }
 
 TSubclassOf<USpell> UWandComponent::GetCurrentSpellClass()
@@ -109,6 +109,8 @@ void UWandComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 
 void UWandComponent::OnRep_EquippedSpellClass()
 {
+	UE_LOG(LogTemp, Warning, TEXT("[ONREP] Clase: %s"),
+		EquippedSpellClass ? *EquippedSpellClass->GetName() : TEXT("NULL"));
 
 	if (EquippedSpellClass)
 	{
