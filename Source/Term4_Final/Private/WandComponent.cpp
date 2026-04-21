@@ -5,6 +5,7 @@
 
 #include "Spell.h"
 #include "SpellGameCharacter.h"
+#include "Net/UnrealNetwork.h"
 #include "Camera/CameraComponent.h"
 
 
@@ -89,10 +90,8 @@ void UWandComponent::ChangeEquippedSpellByClass_Implementation(TSubclassOf<USpel
 {
 	if (!NewSpellClass) return;
 
-	// Spawn de la nueva instancia
 	USpell* NewSpell = NewObject<USpell>(GetOwner(), NewSpellClass);
 
-	// Guardar la clase y llamar al sistema existente
 	EquippedSpellClass = NewSpellClass;
 	ChangeEquippedSpell(NewSpell);
 }
@@ -101,4 +100,20 @@ TSubclassOf<USpell> UWandComponent::GetCurrentSpellClass()
 {
 	return EquippedSpellClass;
 }
+
+void UWandComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(UWandComponent, EquippedSpellClass);
+}
+
+void UWandComponent::OnRep_EquippedSpellClass()
+{
+
+	if (EquippedSpellClass)
+	{
+		EquippedSpell = NewObject<USpell>(GetOwner(), EquippedSpellClass);
+	}
+}
+
 

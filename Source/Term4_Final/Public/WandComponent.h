@@ -28,10 +28,12 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 	// Members
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<USpell> EquippedSpell;
 	
-	UPROPERTY(EditDefaultsOnly)
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UPROPERTY(ReplicatedUsing = OnRep_EquippedSpellClass, EditDefaultsOnly, BlueprintReadWrite)
 	TSubclassOf<USpell> EquippedSpellClass;
 	
 	// Member functions
@@ -53,6 +55,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	TSubclassOf<USpell> GetCurrentSpellClass();
+
+	UFUNCTION()
+	void OnRep_EquippedSpellClass();
 	
 protected:
 	UPROPERTY(BlueprintReadOnly)

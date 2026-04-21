@@ -4,6 +4,11 @@
 #include "Term4_FinalPlayerState.h"
 #include "Net/UnrealNetwork.h"
 
+ATerm4_FinalPlayerState::ATerm4_FinalPlayerState()
+{
+	bReplicates = true;
+}
+
 void ATerm4_FinalPlayerState::Server_UseSpell(TSubclassOf<USpell> SpellClass)
 {
 	if (!HasAuthority() || !SpellClass) return;
