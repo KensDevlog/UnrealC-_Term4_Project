@@ -17,6 +17,8 @@ class TERM4_FINAL_API ATerm4_FinalPlayerState : public APlayerState
 
 public:
 
+    ATerm4_FinalPlayerState();
+
     UPROPERTY(ReplicatedUsing = OnRep_UsedSpells, BlueprintReadOnly, Category = "Spells")
     TArray<TSubclassOf<USpell>> UsedSpells;
 

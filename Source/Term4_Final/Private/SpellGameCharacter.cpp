@@ -10,24 +10,27 @@
 ASpellGameCharacter::ASpellGameCharacter(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer.SetDefaultSubobjectClass<USpellGameMovementComponent>(CharacterMovementComponentName))
 {
-    SpellGameMovementComponent = Cast<USpellGameMovementComponent>(GetCharacterMovement());
-    CurrentHealth = MaxHealth;
-
-    WandComponent = CreateDefaultSubobject<UWandComponent>(TEXT("WandComponent"));
-
-    FirstPersonCharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPersonCharacterMesh"));
-    FirstPersonCharacterMesh->SetupAttachment(GetMesh());
-    FirstPersonCharacterMesh->SetOnlyOwnerSee(true);
-
-    CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
-    CameraComponent->SetupAttachment(FirstPersonCharacterMesh, FName("head"));
-    CameraComponent->SetRelativeLocation(FVector(-2.8f, 5.89f, 0.0f));
-    CameraComponent->SetRelativeRotation(FRotator(0.0f, 90.0f, -90.0f));
-    CameraComponent->SetEnableFirstPersonFieldOfView(true);
-    CameraComponent->SetEnableFirstPersonScale(true);
-    CameraComponent->SetFirstPersonFieldOfView(70.f);
-    CameraComponent->SetFirstPersonScale(0.7f);
-    CameraComponent->bUsePawnControlRotation = true;
+	SpellGameMovementComponent = Cast<USpellGameMovementComponent>(GetCharacterMovement());
+	CurrentHealth = MaxHealth;
+	
+	WandComponent = CreateDefaultSubobject<UWandComponent>(TEXT("WandComponent"));
+	WandComponent->SetIsReplicated(true);
+	
+	FirstPersonCharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPersonCharacterMesh"));
+	FirstPersonCharacterMesh->SetupAttachment(GetMesh());
+	FirstPersonCharacterMesh->SetOnlyOwnerSee(true);
+	
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
+	CameraComponent->SetupAttachment(FirstPersonCharacterMesh, FName("head"));
+	CameraComponent->SetRelativeLocation(FVector(-2.8f, 5.89f, 0.0f));
+	CameraComponent->SetRelativeRotation(FRotator(0.0f, 90.0f, -90.0f));
+	CameraComponent->SetEnableFirstPersonFieldOfView(true);
+	CameraComponent->SetEnableFirstPersonScale(true);
+	CameraComponent->SetFirstPersonFieldOfView(70.f);
+	CameraComponent->SetFirstPersonScale(0.7f);
+	
+	CameraComponent->bUsePawnControlRotation = true;
+	
 }
 
 void ASpellGameCharacter::BeginPlay()
@@ -133,13 +136,33 @@ void ASpellGameCharacter::OnShootInputReceived(const FInputActionValue& Value)
     WandComponent->HandleShootInput(Value.Get<bool>());
 }
 
-void ASpellGameCharacter::Multicast_OnDeath_Implementation()
+void ASpellGameCharacter::Multicast_OnDeath_Implementation(ASpellGameCharacter* Killer)
 {
-    BP_OnDeath();
+	BP_OnDeath(Killer);
 }
 
 void ASpellGameCharacter::Client_UpdateHealth_Implementation(float HealthPercent)
 {
+	const float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	CurrentHealth = FMath::Clamp(CurrentHealth - ActualDamage, 0.f, MaxHealth);
+
+	if (CurrentHealth <= 0.f)
+	{
+
+		if(ASpellGameCharacter* InstigatorCharacter = Cast<ASpellGameCharacter>(EventInstigator->GetPawn()))
+		{
+			Multicast_OnDeath(InstigatorCharacter);
+		}
+		else
+		{
+			Multicast_OnDeath(nullptr);
+		}
+
+		OnCharacterDied.Broadcast(this);
+	}
+
+	return ActualDamage;
     OnHealthChanged.Broadcast(HealthPercent);
 }
 

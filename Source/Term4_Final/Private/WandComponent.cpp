@@ -5,6 +5,7 @@
 
 #include "Spell.h"
 #include "SpellGameCharacter.h"
+#include "Net/UnrealNetwork.h"
 #include "Camera/CameraComponent.h"
 
 
@@ -23,6 +24,7 @@ UWandComponent::UWandComponent()
 void UWandComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
 
 	if (EquippedSpellClass)
 	{
@@ -75,8 +77,45 @@ void UWandComponent::HandleShootInput(bool InputDown)
 	InputDown ? IsTryingToCast = true : IsTryingToCast = false;
 }
 
+USpell* UWandComponent::GetCurrentSpell()
+{
+	return EquippedSpell;
+}
+
 void UWandComponent::ChangeEquippedSpell_Implementation(USpell* NewSpell)
 {
 	EquippedSpell = NewSpell;
 }
+
+void UWandComponent::ChangeEquippedSpellByClass_Implementation(TSubclassOf<USpell> NewSpellClass)
+{
+
+	if (!NewSpellClass) return;
+
+	EquippedSpellClass = NewSpellClass;
+	EquippedSpell = NewObject<USpell>(GetOwner(), NewSpellClass);
+}
+
+TSubclassOf<USpell> UWandComponent::GetCurrentSpellClass()
+{
+	return EquippedSpellClass;
+}
+
+void UWandComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(UWandComponent, EquippedSpellClass);
+}
+
+void UWandComponent::OnRep_EquippedSpellClass()
+{
+	UE_LOG(LogTemp, Warning, TEXT("[ONREP] Clase: %s"),
+		EquippedSpellClass ? *EquippedSpellClass->GetName() : TEXT("NULL"));
+
+	if (EquippedSpellClass)
+	{
+		EquippedSpell = NewObject<USpell>(GetOwner(), EquippedSpellClass);
+	}
+}
+
 
