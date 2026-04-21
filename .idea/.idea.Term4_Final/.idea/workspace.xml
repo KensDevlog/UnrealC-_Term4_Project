@@ -12,7 +12,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dec0dff1-3a33-42fa-9ad9-f147e08de186" name="Changes" comment="" />
+    <list default="true" id="dec0dff1-3a33-42fa-9ad9-f147e08de186" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Term4_Final/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Term4_Final/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/GameMode/PC_Spell.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/GameMode/PC_Spell.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_SpellGameHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_SpellGameHUD.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGamePlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGamePlayerController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGamePlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGamePlayerController.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +72,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;CustomMovement&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;UI&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -190,6 +198,7 @@
       <workItem from="1776544775507" duration="5281000" />
       <workItem from="1776550502088" duration="3428000" />
       <workItem from="1776554438963" duration="22203000" />
+      <workItem from="1776754205306" duration="1693000" />
     </task>
     <servers />
   </component>
