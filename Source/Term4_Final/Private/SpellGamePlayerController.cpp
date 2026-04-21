@@ -1,54 +1,95 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "SpellGamePlayerController.h"
-#include "EnhancedInputSubsystems.h"
-#include "Engine/LocalPlayer.h"
+#include "SpellGameCharacter.h"
+#include "SpellGameHUD.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerStart.h"
-#include "SpellGameCharacter.h"
 
 void ASpellGamePlayerController::BeginPlay()
 {
-	Super::BeginPlay();
-}
+    Super::BeginPlay();
 
+    if (IsLocalPlayerController())
+    {
+        if (HUDClass)
+        {
+            HUD = CreateWidget<USpellGameHUD>(this, HUDClass);
+            if (HUD)
+            {
+                HUD->AddToPlayerScreen(0);
+                HUD->BP_UpdateHealth(1.f);
+                HUD->BP_UpdateKills(0);
+                HUD->BP_UpdateDeaths(0);
+                HUD->BP_UpdateScore(0);
+            }
+        }
+    }
+}
 
 void ASpellGamePlayerController::OnPossess(APawn* InPawn)
 {
-	Super::OnPossess(InPawn);
+    Super::OnPossess(InPawn);
 
-	// subscribe to the pawn's OnDestroyed delegate
-	InPawn->OnDestroyed.AddDynamic(this, &ASpellGamePlayerController::OnPawnDestroyed);
+    InPawn->OnDestroyed.AddDynamic(this, &ASpellGamePlayerController::OnPawnDestroyed);
 
-	// is this a shooter character?
-	if (ASpellGameCharacter* SpellCharacter = Cast<ASpellGameCharacter>(InPawn))
-	{
-		
-	}
+    if (ASpellGameCharacter* SpellCharacter = Cast<ASpellGameCharacter>(InPawn))
+    {
+        // reset health bar to full on each new possession
+        if (HUD)
+        {
+            HUD->BP_UpdateHealth(1.f);
+        }
+    }
+}
+
+void ASpellGamePlayerController::OnPawnHealthChanged(float HealthPercent)
+{
+    if (HUD)
+    {
+        HUD->BP_UpdateHealth(HealthPercent);
+    }
 }
 
 void ASpellGamePlayerController::OnPawnDestroyed(AActor* DestroyedActor)
 {
+    DeathCount++;
 
-	// find the player start
-	TArray<AActor*> ActorList;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), ActorList);
+    if (HUD)
+    {
+        HUD->BP_UpdateDeaths(DeathCount);
+    }
 
-	if (ActorList.Num() > 0)
-	{
-		// select a random player start
-		AActor* RandomPlayerStart = ActorList[FMath::RandRange(0, ActorList.Num() - 1)];
+    // credit the kill to whoever killed this character
+    if (ASpellGameCharacter* DeadChar = Cast<ASpellGameCharacter>(DestroyedActor))
+    {
+        if (ASpellGamePlayerController* KillerPC = Cast<ASpellGamePlayerController>(DeadChar->GetLastInstigator()))
+        {
+            KillerPC->NotifyKill();
+        }
+    }
 
-		// spawn a character at the player start
-		const FTransform SpawnTransform = RandomPlayerStart->GetActorTransform();
+    // respawn
+    TArray<AActor*> ActorList;
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), ActorList);
 
-		if (ASpellGameCharacter* RespawnedCharacter = GetWorld()->SpawnActor<ASpellGameCharacter>(CharacterClass, SpawnTransform))
-		{
-			// possess the character
-			Possess(RespawnedCharacter);
-		}
-	}
+    if (ActorList.Num() > 0)
+    {
+        AActor* RandomPlayerStart = ActorList[FMath::RandRange(0, ActorList.Num() - 1)];
+        const FTransform SpawnTransform = RandomPlayerStart->GetActorTransform();
+
+        if (ASpellGameCharacter* RespawnedCharacter = GetWorld()->SpawnActor<ASpellGameCharacter>(CharacterClass, SpawnTransform))
+        {
+            Possess(RespawnedCharacter);
+        }
+    }
 }
 
+void ASpellGamePlayerController::NotifyKill()
+{
+    KillCount++;
 
+    if (HUD)
+    {
+        HUD->BP_UpdateKills(KillCount);
+        HUD->BP_UpdateScore(KillCount);
+    }
+}
