@@ -24,7 +24,7 @@ jobs:
       - name: Build Project
         id: build_step
         run: |
-          & "C:\Program Files\Epic Games\UE_5.6\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun ` #put the path to your RunUAT.bat file here, make it match the version of your project
+          & "C:\Program Files\Epic Games\UE_5.6\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun ` 
           -project="C:\Users\Public\Repos\UnrealC-_Term4_Project\Term4_Final.uproject" `
           -platform=Win64 `
           -clientconfig=Shipping `
