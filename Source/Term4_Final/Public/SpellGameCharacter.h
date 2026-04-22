@@ -83,17 +83,8 @@ public:
     UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="Camera")
     TObjectPtr<UCameraComponent> CameraComponent;
 
-    UFUNCTION(NetMulticast, Reliable)
-    void Multicast_OnDeath();
-
-    UFUNCTION(BlueprintImplementableEvent, Category="Spell", meta=(DisplayName="On Death"))
-    void BP_OnDeath();
-
     UFUNCTION(Client, Reliable)
     void Client_UpdateHealth(float HealthPercent);
-
-    virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
-                             class AController* EventInstigator, AActor* DamageCauser) override;
 
     AController* GetLastInstigator() const { return LastInstigator; }
 

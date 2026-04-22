@@ -14,12 +14,15 @@
   <component name="ChangeListManager">
     <list default="true" id="dec0dff1-3a33-42fa-9ad9-f147e08de186" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Term4_Final/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Term4_Final/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/GameMode/PC_Spell.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/GameMode/PC_Spell.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_SpellGameHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_SpellGameHUD.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/GameMode/GM_Testing.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/GameMode/GM_Testing.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/GameMode/PS_Testing.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/GameMode/PS_Testing.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_EnergyBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_EnergyBall.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_FireBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_FireBall.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_SmokeBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_SmokeBall.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/Spells/BP_FireSpell.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/Spells/BP_FireSpell.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Player/BP_SpellGameCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Player/BP_SpellGameCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGamePlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGamePlayerController.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGamePlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGamePlayerController.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,10 +36,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Plugins/FX/Niagara/Source/Niagara/Private/NiagaraDataInterfaceArrayFunctionLibrary.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Plugins/FX/Niagara/Source/Niagara/Private/NiagaraDataInterfaceArrayFunctionLibrary.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Plugins/FX/Niagara/Source/Niagara/Public/NiagaraSystemSimulation.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Plugins/FX/Niagara/Source/NiagaraEditor/Private/UpgradeNiagaraScriptResults.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Editor/AudioEditor/Private/AssetTypeActions/AssetDefinition_SoundAttenuation.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Classes/Components/ActorComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Actor.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Character.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Public/Physics/NetworkPhysicsComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Private/Spell.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -64,23 +70,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C/C++ Project.Term4_Final.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;UI&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C/C++ Project.Term4_Final.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C/C++ Project.Term4_Final">
     <configuration name="Term4_Final" type="CppProject" factoryName="C++ Project">
       <configuration_1 setup="1">
@@ -199,6 +205,7 @@
       <workItem from="1776550502088" duration="3428000" />
       <workItem from="1776554438963" duration="22203000" />
       <workItem from="1776754205306" duration="1693000" />
+      <workItem from="1776813132805" duration="2179000" />
     </task>
     <servers />
   </component>
