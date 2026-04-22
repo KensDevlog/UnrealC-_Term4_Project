@@ -12,18 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dec0dff1-3a33-42fa-9ad9-f147e08de186" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Term4_Final/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Term4_Final/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/GameMode/GM_Testing.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/GameMode/GM_Testing.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/GameMode/PS_Testing.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/GameMode/PS_Testing.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_EnergyBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_EnergyBall.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_FireBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_FireBall.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_SmokeBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/SpellProjectiles/BP_SmokeBall.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/Spells/BP_FireSpell.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MagicStuff/Spells/BP_FireSpell.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Player/BP_SpellGameCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Player/BP_SpellGameCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Private/SpellGameCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Term4_Final/Public/SpellGameCharacter.h" afterDir="false" />
-    </list>
+    <list default="true" id="dec0dff1-3a33-42fa-9ad9-f147e08de186" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -205,7 +194,7 @@
       <workItem from="1776550502088" duration="3428000" />
       <workItem from="1776554438963" duration="22203000" />
       <workItem from="1776754205306" duration="1693000" />
-      <workItem from="1776813132805" duration="2179000" />
+      <workItem from="1776813132805" duration="2806000" />
     </task>
     <servers />
   </component>
